@@ -6,10 +6,24 @@ spring:
   ai:
     google:
       genai:
-        api-key: //
+        api-key: // add it later
         chat:
           options:
             model: gemini-3.6-flash
+        embedding:
+          api-key: //add it later
+
+    vectorstore:
+      qdrant:
+        initialize-schema: true
+        host: localhost
+        port: 6334
+        collection-name: spring-gemini-ai-rag
+
+  docker:
+    compose:
+      stop:
+        command: down
   
 server:
   port: 9191
