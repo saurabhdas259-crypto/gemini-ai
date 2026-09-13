@@ -1,0 +1,27 @@
+package com.interview.spring_gemini_ai.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.interview.spring_gemini_ai.service.ChatService;
+
+import reactor.core.publisher.Flux;
+
+@RestController
+@RequestMapping ("/api/chat")
+public class ChatController {
+
+    @Autowired 
+    private ChatService chatService;
+
+
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> streamChat(@RequestParam String prompt) {
+        return chatService.chat(prompt);
+    }
+
+}
